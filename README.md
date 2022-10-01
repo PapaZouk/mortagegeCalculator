@@ -73,7 +73,7 @@ The mortgage calculator works as follows:
 ### <u>Formula for calculating installments:</u>
 
 #### Fixed:
-```aidl
+```
     R = A * (q ^n) * (q - 1) / [(q ^ n) - 1]
     
     q = 1+ (b / 12) // q = 1 + (4,75% / 12) = 1,00392
@@ -87,7 +87,7 @@ The mortgage calculator works as follows:
     C - total loan cost left to be paid
 
 #### Decreasing installments:
-```aidl
+```
     R = A * [1 + (N - n + 1) * (r / m)] / N
 ```
 *Legend:*
