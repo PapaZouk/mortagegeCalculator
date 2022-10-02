@@ -22,7 +22,7 @@ public class InputData {
     private BigDecimal monthDuration = new BigDecimal("300");
 
     // Typ spłacanych rat (stałe / malejące)
-    private RateType rateType = RateType.CONSTANT;
+    private RateType installmentType = RateType.CONSTANT;
 
     // Marża banku
     private BigDecimal bankMarginPercent = new BigDecimal("1.9");
@@ -50,7 +50,7 @@ public class InputData {
     }
 
     public InputData withRateType(RateType rateType) {
-        this.rateType = rateType;
+        this.installmentType = rateType;
         return this;
     }
 
@@ -71,8 +71,8 @@ public class InputData {
         return monthDuration;
     }
 
-    public RateType getRateType() {
-        return rateType;
+    public RateType getInstallmentType() {
+        return installmentType;
     }
 
     public BigDecimal getInterestPercent() {

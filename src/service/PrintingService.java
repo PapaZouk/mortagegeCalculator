@@ -2,6 +2,7 @@ package service;
 
 import model.InputData;
 
+@SuppressWarnings("unused")
 public interface PrintingService {
 
     String INTEREST_SUM = "SUMA ODSETEK: ";

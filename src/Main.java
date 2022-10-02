@@ -1,6 +1,6 @@
 import model.InputData;
 import model.RateType;
-import service.*;
+import service. *;
 
 import java.math.BigDecimal;
 
@@ -14,7 +14,12 @@ public class Main {
                 .withRateType(RateType.DECREASING);
 
         PrintingService printingService = new PrintingServiceImpl();
-        InstallmentCalculationService installmentCalculationService = new InstallmentCalculationServiceImpl();
+        InstallmentCalculationService installmentCalculationService = new InstallmentCalculationServiceImpl(
+                new TimePointSerivceImpl(),
+                new AmountCalculationServiceImpl(),
+                new ResidualCalculationServiceImpl()
+        );
+
 
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(
                 installmentCalculationService ,

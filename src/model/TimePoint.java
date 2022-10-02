@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 public class TimePoint {
 
+    // Obiekt czasowy dla pojedynczej raty
+
     private final LocalDate date;
 
     private final BigDecimal year;
@@ -27,5 +29,14 @@ public class TimePoint {
 
     public BigDecimal getMonth() {
         return month;
+    }
+
+    @Override
+    public String toString() {
+        return "TimePoint{" +
+                "date=" + date +
+                ", year=" + year +
+                ", month=" + month +
+                '}';
     }
 }

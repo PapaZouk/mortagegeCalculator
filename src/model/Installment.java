@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 
 public class Installment {
 
+    /* Obiekt raty przechowuje:
+        - punkt czasowy raty, czyli kiedy rata nastąpi,
+        - numer raty,
+        - wielkość raty,
+        - pozostałą kwotę do spłaty.
+     */
     private final TimePoint timePoint;
 
     private final BigDecimal installmentNumber;
@@ -38,5 +44,12 @@ public class Installment {
 
     public MortgageResidual getMortgageResidual() {
         return mortgageResidual;
+    }
+
+    @Override
+    public String toString() {
+        return "Installment{" +
+                "timePoint=" + timePoint +
+                '}';
     }
 }
