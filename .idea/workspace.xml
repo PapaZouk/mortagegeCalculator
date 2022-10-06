@@ -2,8 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0f1fae9f-21e3-446e-bcb6-afa572aa54ea" name="Changes" comment="Adding and updating:&#10;&#10;Interfaces:&#10;- AmountsCalculationService&#10;- PrintingService&#10;- ResidualCalculationService&#10;- TimePointService&#10;&#10;Classes implementing services:&#10;- AmountCalculationServiceImpl&#10;- ResidualCalculationServiceImpl&#10;- TimePointSerivceImpl&#10;&#10;Classes:&#10;- MortgageResidual&#10;- InstallmentAmounts&#10;- Installment&#10;- InputData">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/exception/InstallmentCalculationException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/InputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/InputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Installment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Installment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/InstallmentAmounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/InstallmentAmounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/MortgageResidual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MortgageResidual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/RateType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/InstallmentType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/AmountCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/AmountCalculationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/InstallmentCalculationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/InstallmentCalculationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/InstallmentCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/InstallmentCalculationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/MortgageCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MortgageCalculationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/PrintingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/PrintingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/PrintingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/PrintingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ResidualCalculationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ResidualCalculationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ResidualCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ResidualCalculationServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,19 +81,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Language Defaults"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Language Defaults&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Markdown"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Markdown&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="service" />
@@ -117,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664656991391</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Adding and updating:&#10;&#10;Interfaces:&#10;- AmountsCalculationService&#10;- PrintingService&#10;- ResidualCalculationService&#10;- TimePointService&#10;&#10;Classes implementing services:&#10;- AmountCalculationServiceImpl&#10;- ResidualCalculationServiceImpl&#10;- TimePointSerivceImpl&#10;&#10;Classes:&#10;- MortgageResidual&#10;- InstallmentAmounts&#10;- Installment&#10;- InputData">
+      <created>1664734271674</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664734271674</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,17 +168,7 @@
     <MESSAGE value="Updating project README" />
     <MESSAGE value="Adding Services package, PrintingService interface with implementation and InpudData class with RateType Enum" />
     <MESSAGE value="Adding interfaces of:&#10;- InstallmentCalculationService&#10;- MortgageCalculationService&#10;Adding classes:&#10;- Installment&#10;- InstallmentAmounts&#10;- InstallmentCalculationServiceImpl&#10;- MortgageCalculationServiceImpl&#10;- MortgageResidual&#10;- TimePoint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding interfaces of:&#10;- InstallmentCalculationService&#10;- MortgageCalculationService&#10;Adding classes:&#10;- Installment&#10;- InstallmentAmounts&#10;- InstallmentCalculationServiceImpl&#10;- MortgageCalculationServiceImpl&#10;- MortgageResidual&#10;- TimePoint" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/service/AmountCalculationServiceImpl.java</url>
-          <line>89</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Adding and updating:&#10;&#10;Interfaces:&#10;- AmountsCalculationService&#10;- PrintingService&#10;- ResidualCalculationService&#10;- TimePointService&#10;&#10;Classes implementing services:&#10;- AmountCalculationServiceImpl&#10;- ResidualCalculationServiceImpl&#10;- TimePointSerivceImpl&#10;&#10;Classes:&#10;- MortgageResidual&#10;- InstallmentAmounts&#10;- Installment&#10;- InputData" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding and updating:&#10;&#10;Interfaces:&#10;- AmountsCalculationService&#10;- PrintingService&#10;- ResidualCalculationService&#10;- TimePointService&#10;&#10;Classes implementing services:&#10;- AmountCalculationServiceImpl&#10;- ResidualCalculationServiceImpl&#10;- TimePointSerivceImpl&#10;&#10;Classes:&#10;- MortgageResidual&#10;- InstallmentAmounts&#10;- Installment&#10;- InputData" />
   </component>
 </project>

@@ -16,13 +16,13 @@ public class InputData {
     private BigDecimal wiborPercent = new BigDecimal("6.95");
 
     // Kwota kredytu
-    private BigDecimal amount = new BigDecimal("3000000");
+    private BigDecimal amount = new BigDecimal("300000");
 
     // Czas trwania kredytu
-    private BigDecimal monthDuration = new BigDecimal("300");
+    private BigDecimal monthDuration = new BigDecimal("240");
 
     // Typ spłacanych rat (stałe / malejące)
-    private RateType installmentType = RateType.CONSTANT;
+    private InstallmentType installmentType = InstallmentType.CONSTANT;
 
     // Marża banku
     private BigDecimal bankMarginPercent = new BigDecimal("1.9");
@@ -49,8 +49,8 @@ public class InputData {
         return this;
     }
 
-    public InputData withRateType(RateType rateType) {
-        this.installmentType = rateType;
+    public InputData withRateType(InstallmentType installmentType) {
+        this.installmentType = installmentType;
         return this;
     }
 
@@ -71,7 +71,7 @@ public class InputData {
         return monthDuration;
     }
 
-    public RateType getInstallmentType() {
+    public InstallmentType getInstallmentType() {
         return installmentType;
     }
 

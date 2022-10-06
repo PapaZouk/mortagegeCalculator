@@ -1,17 +1,19 @@
 import model.InputData;
-import model.RateType;
+import model.InstallmentType;
 import service. *;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Main {
 
     public static void main(String[] args) {
 
         InputData inputData = new InputData()
-                .withAmount(BigDecimal.valueOf(4000000))
-                .withMonthDuration(BigDecimal.valueOf(360))
-                .withRateType(RateType.DECREASING);
+                .withRepaymentStartDate(LocalDate.now())
+                .withAmount(BigDecimal.valueOf(300000))
+                .withMonthDuration(BigDecimal.valueOf(240))
+                .withRateType(InstallmentType.CONSTANT);
 
         PrintingService printingService = new PrintingServiceImpl();
         InstallmentCalculationService installmentCalculationService = new InstallmentCalculationServiceImpl(

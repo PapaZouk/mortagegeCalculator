@@ -49,7 +49,8 @@ public class Installment {
     @Override
     public String toString() {
         return "Installment{" +
-                "timePoint=" + timePoint +
+                "installmentAmounts=" + installmentAmounts +
+                ", mortgageResidual=" + mortgageResidual +
                 '}';
     }
 }

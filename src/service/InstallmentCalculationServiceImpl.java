@@ -57,7 +57,7 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
     private Installment calculateInstallment(BigDecimal installmentNumber, InputData inputData) {
         TimePoint timePoint = timePointService.calculate(installmentNumber, inputData);
         InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData);
-        MortgageResidual mortgageResidual = residualCalculationService.calculate();
+        MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, inputData);
         return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual);
     }
 
@@ -65,7 +65,7 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
     private Installment calculateInstallment (BigDecimal installmentNumber, InputData inputData, Installment previousInstallment) {
         TimePoint timePoint = timePointService.calculate(installmentNumber, inputData);
         InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, previousInstallment);
-        MortgageResidual mortgageResidual = residualCalculationService.calculate();
+        MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, previousInstallment);
         return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual);
     }
 }

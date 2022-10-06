@@ -3,6 +3,7 @@ package service;
 import model.InputData;
 import model.Installment;
 import model.InstallmentAmounts;
+import model.exception.InstallmentCalculationException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,14 +17,14 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
     // - kredyt o ratach stałych,
     // - kredyt o ratach malejących
     @Override
-    public InstallmentAmounts calculate(InputData inputData) {
+    public InstallmentAmounts  calculate(InputData inputData) {
         switch (inputData.getInstallmentType()) {
             case CONSTANT:
                 return calculateConstantInstallment(inputData);
             case DECREASING:
                 return calculateDecreasingInstallment(inputData);
             default:
-                throw new RuntimeException("Case not handled");
+                throw new InstallmentCalculationException();
         }
     }
 
@@ -36,7 +37,7 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
             case DECREASING:
                 return calculateDecreasingInstallment(inputData, previousInstallment);
             default:
-                throw new RuntimeException("Case not handled");
+                throw new InstallmentCalculationException();
         }
     }
 
@@ -49,6 +50,19 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
         BigDecimal installmentAmount = calculateConstantInstallmentAmount(q, inputData.getAmount(), inputData.getMonthDuration());
         BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
         BigDecimal capitalAmount = calculateConstantCapitalAmount(installmentAmount, interestAmount);
+
+        return new InstallmentAmounts(installmentAmount, interestAmount, capitalAmount);
+    }
+
+    private InstallmentAmounts calculateConstantInstallment(InputData inputData, Installment previousInstallment) {
+        BigDecimal interestPercent = inputData.getInterestPercent();
+        BigDecimal residualAmount = previousInstallment.getMortgageResidual().getAmount();
+
+        BigDecimal q = calculateQ(interestPercent);
+
+        BigDecimal installmentAmount = calculateConstantInstallmentAmount(q, inputData.getAmount(), inputData.getMonthDuration());
+        BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent); // część odsetkowa
+        BigDecimal capitalAmount = calculateConstantCapitalAmount(installmentAmount, interestAmount); // część kapitałowa
 
         return new InstallmentAmounts(installmentAmount, interestAmount, capitalAmount);
     }
@@ -66,20 +80,7 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
     }
 
     private BigDecimal calculateConstantCapitalAmount(BigDecimal installmentAmount, BigDecimal interestAmount) {
-        return interestAmount.subtract(interestAmount);
-    }
-
-    private InstallmentAmounts calculateConstantInstallment(InputData inputData, Installment previousInstallment) {
-        BigDecimal interestPercent = inputData.getInterestPercent();
-        BigDecimal residualAmount = previousInstallment.getMortgageResidual().getAmount();
-
-        BigDecimal q = calculateQ(interestPercent);
-
-        BigDecimal installmentAmount = calculateConstantInstallmentAmount(q, inputData.getAmount(), inputData.getMonthDuration());
-        BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-        BigDecimal capitalAmount = calculateConstantCapitalAmount(installmentAmount, interestAmount);
-
-        return new InstallmentAmounts(installmentAmount, interestAmount, capitalAmount);
+        return installmentAmount.subtract(interestAmount);
     }
 
     private InstallmentAmounts calculateDecreasingInstallment(InputData inputData) {
@@ -88,7 +89,7 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
 
         BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
         BigDecimal capitalAmount = calculateDecreasingCapitalAmount(residualAmount, inputData.getMonthDuration());
-        BigDecimal installmentAmount = capitalAmount.add(interestAmount);
+         BigDecimal installmentAmount = capitalAmount.add(interestAmount);
 
         return new InstallmentAmounts(installmentAmount, interestAmount, capitalAmount);
     }
@@ -102,7 +103,7 @@ public class AmountCalculationServiceImpl implements AmountsCalculationService {
         BigDecimal residualAmount = previousInstallment.getMortgageResidual().getAmount();
 
         BigDecimal interestAmount = calculateInterestAmount(residualAmount, interestPercent);
-        BigDecimal capitalAmount = calculateDecreasingCapitalAmount(residualAmount, inputData.getMonthDuration());
+        BigDecimal capitalAmount = calculateDecreasingCapitalAmount(inputData.getAmount(), inputData.getMonthDuration());
         BigDecimal installmentAmount = capitalAmount.add(interestAmount);
 
         return new InstallmentAmounts(installmentAmount, interestAmount, capitalAmount);

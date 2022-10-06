@@ -1,6 +1,6 @@
 package model;
 
-public enum RateType {
+public enum InstallmentType {
     CONSTANT,
     DECREASING
 }

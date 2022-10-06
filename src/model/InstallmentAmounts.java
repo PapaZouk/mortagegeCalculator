@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class InstallmentAmounts {
 
@@ -28,14 +29,23 @@ public class InstallmentAmounts {
     }
 
     public BigDecimal getInstallmentAmount() {
-        return installmentAmount;
+        return installmentAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getInterestAmount() {
-        return interestAmount;
+        return interestAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getCapitalAmount() {
-        return capitalAmount;
+        return capitalAmount.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    @Override
+    public String toString() {
+        return "InstallmentAmounts{" +
+                "installmentAmount=" + installmentAmount +
+                ", interestAmount=" + interestAmount +
+                ", capitalAmount=" + capitalAmount +
+                '}';
     }
 }

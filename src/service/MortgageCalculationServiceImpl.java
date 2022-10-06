@@ -24,5 +24,7 @@ public class MortgageCalculationServiceImpl implements MortgageCalculationServic
         printingService.printInputDataInfo(inputData);
 
         List<Installment> installments = installmentCalculationService.calculate(inputData);
+
+        printingService.printInstallments(installments);
     }
 }

@@ -1,6 +1,10 @@
 package service;
 
 import model.InputData;
+import model.Installment;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public class PrintingServiceImpl implements PrintingService{
     @Override
@@ -14,6 +18,39 @@ public class PrintingServiceImpl implements PrintingService{
         msg.append(NEW_LINE);
 
         printMessage(msg);
+    }
+
+    @Override
+    public void printInstallments(List<Installment> installments) {
+        String format = "%4s %3s " +
+                "%4s %6s " +
+                "%6s %2s " +
+                "%4s %2s " +
+                "%4s %8s " +
+                "%7s %8s " +
+                "%7s %10s " +
+                "%7s %10s " +
+                "%7s %3s ";
+
+        for (Installment installment : installments) {
+            String message = String.format(format,
+                    INSTALLMENT_NUMBER, installment.getInstallmentNumber(),
+                    DATE, installment.getTimePoint().getDate(),
+                    YEAR, installment.getTimePoint().getYear(),
+                    MONTH, installment.getTimePoint().getMonth(),
+                    INSTALLMENT, installment.getInstallmentAmounts().getInstallmentAmount(),
+                    INTEREST, installment.getInstallmentAmounts().getInterestAmount(),
+                    CAPITAL, installment.getInstallmentAmounts().getCapitalAmount(),
+                    LEFT_AMOUNT, installment.getMortgageResidual().getAmount(),
+                    LEFT_MONTHS, installment.getMortgageResidual().getDuration());
+            printMessage(new StringBuilder(message));
+
+            if (installment.getInstallmentNumber().remainder(BigDecimal.valueOf(12)).equals(BigDecimal.ZERO)) {
+                System.out.println("== Year of payment NR: " + installment.getTimePoint().getYear() +
+                        " ======================================================================" +
+                        "======================================================================");
+            }
+        }
     }
 
     private void printMessage(StringBuilder sb) {
