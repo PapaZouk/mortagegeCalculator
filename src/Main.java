@@ -1,6 +1,6 @@
 import model.InputData;
 import model.InstallmentType;
-import service. *;
+import service.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,20 +12,23 @@ public class Main {
         InputData inputData = new InputData()
                 .withRepaymentStartDate(LocalDate.now())
                 .withAmount(BigDecimal.valueOf(300000))
-                .withMonthDuration(BigDecimal.valueOf(240))
-                .withRateType(InstallmentType.CONSTANT);
+                .withMonthDuration(BigDecimal.valueOf(280))
+                .withRateType(InstallmentType.DECREASING);
 
         PrintingService printingService = new PrintingServiceImpl();
         InstallmentCalculationService installmentCalculationService = new InstallmentCalculationServiceImpl(
                 new TimePointSerivceImpl(),
                 new AmountCalculationServiceImpl(),
+                new OverpaymentCalculatorServiceImpl(),
+                new ReferenceCalculatorServiceImpl(),
                 new ResidualCalculationServiceImpl()
         );
 
 
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(
-                installmentCalculationService ,
-                printingService
+                installmentCalculationService,
+                printingService,
+                SummaryServiceFactory.create()
         );
 
         mortgageCalculationService.calculate(inputData);

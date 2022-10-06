@@ -14,16 +14,24 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
 
     private final AmountsCalculationService amountsCalculationService;
 
+    private final OverpaymentCalculatorService overpaymentCalculatorService;
+
+    private final ReferenceCalculatorService referenceCalculatorService;
+
     private final ResidualCalculationService residualCalculationService;
 
     public InstallmentCalculationServiceImpl(
             TimePointService timePointService,
             AmountsCalculationService amountsCalculationService,
-            ResidualCalculationService residualCalculationService)
-    {
+            OverpaymentCalculatorService overpaymentCalculatorService,
+            ReferenceCalculatorService referenceCalculatorService,
+            ResidualCalculationService residualCalculationService
+            ) {
         this.timePointService = timePointService;
         this.amountsCalculationService = amountsCalculationService;
         this.residualCalculationService = residualCalculationService;
+        this.overpaymentCalculatorService = overpaymentCalculatorService;
+        this.referenceCalculatorService = referenceCalculatorService;
     }
 
     @Override
@@ -56,16 +64,22 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
     // Liczy pierwszą ratę kredytu jako podstawa do obliczeń kolejnych rat, bez odniesienia do poprzednich rat
     private Installment calculateInstallment(BigDecimal installmentNumber, InputData inputData) {
         TimePoint timePoint = timePointService.calculate(installmentNumber, inputData);
-        InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData);
+        Overpayment overpayment = overpaymentCalculatorService.calculate(installmentNumber, inputData);
+        InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, overpayment);
         MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, inputData);
-        return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual);
+        MortgageReference mortgageReference = referenceCalculatorService.calculate();
+
+        return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual, mortgageReference);
     }
 
     // Liczy każdą kolejną ratę kredytu
     private Installment calculateInstallment (BigDecimal installmentNumber, InputData inputData, Installment previousInstallment) {
         TimePoint timePoint = timePointService.calculate(installmentNumber, inputData);
-        InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, previousInstallment);
+        Overpayment  overpayment = overpaymentCalculatorService.calculate(installmentNumber, inputData);
+        InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, overpayment, previousInstallment);
         MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, previousInstallment);
-        return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual);
+        MortgageReference mortgageReference = referenceCalculatorService.calculate();
+
+        return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual, mortgageReference);
     }
 }

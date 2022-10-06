@@ -2,6 +2,7 @@ package service;
 
 import model.InputData;
 import model.Installment;
+import model.Summary;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface PrintingService {
     void printInputDataInfo(final InputData inputData);
 
     void printInstallments(List<Installment> installments);
+
+    void printSummary(Summary summary);
 }

@@ -16,16 +16,24 @@ public class InstallmentAmounts {
 
     private final BigDecimal interestAmount;
 
-    private final  BigDecimal capitalAmount;
+    private final BigDecimal capitalAmount;
+
+    private final Overpayment overpayment;
 
     public InstallmentAmounts(
             BigDecimal installmentAmount,
             BigDecimal interestAmount,
-            BigDecimal capitalAmount)
-    {
+            BigDecimal capitalAmount,
+            Overpayment overpayment
+    ) {
         this.installmentAmount = installmentAmount;
         this.interestAmount = interestAmount;
         this.capitalAmount = capitalAmount;
+        this.overpayment = overpayment;
+    }
+
+    public Overpayment getOverpayment() {
+        return overpayment;
     }
 
     public BigDecimal getInstallmentAmount() {
@@ -40,12 +48,4 @@ public class InstallmentAmounts {
         return capitalAmount.setScale(2, RoundingMode.HALF_UP);
     }
 
-    @Override
-    public String toString() {
-        return "InstallmentAmounts{" +
-                "installmentAmount=" + installmentAmount +
-                ", interestAmount=" + interestAmount +
-                ", capitalAmount=" + capitalAmount +
-                '}';
-    }
 }

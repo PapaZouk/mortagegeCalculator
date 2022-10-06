@@ -18,16 +18,20 @@ public class Installment {
 
     private final MortgageResidual mortgageResidual;
 
+    private final MortgageReference mortgageReference;
+
     public Installment(
             TimePoint timePoint,
             BigDecimal installmentNumber,
             InstallmentAmounts installmentAmounts,
-            MortgageResidual mortgageResidual)
-    {
+            MortgageResidual mortgageResidual,
+            MortgageReference mortgageReference
+    ) {
         this.timePoint = timePoint;
         this.installmentNumber = installmentNumber;
         this.installmentAmounts = installmentAmounts;
         this.mortgageResidual = mortgageResidual;
+        this.mortgageReference = mortgageReference;
     }
 
     public TimePoint getTimePoint() {
@@ -46,11 +50,7 @@ public class Installment {
         return mortgageResidual;
     }
 
-    @Override
-    public String toString() {
-        return "Installment{" +
-                "installmentAmounts=" + installmentAmounts +
-                ", mortgageResidual=" + mortgageResidual +
-                '}';
+    public MortgageReference getMortgageReference() {
+        return mortgageReference;
     }
 }

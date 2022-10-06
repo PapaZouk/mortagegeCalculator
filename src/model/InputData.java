@@ -3,6 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.util.Map;
 
 // Symuluje dane wejściowe do programu
 public class InputData {
@@ -13,19 +14,59 @@ public class InputData {
     private LocalDate repaymentStartDate = LocalDate.of(2020, 1, 6);
 
     // Stawka WIBOR
-    private BigDecimal wiborPercent = new BigDecimal("6.95");
+    private BigDecimal wiborPercent = new BigDecimal("6.75");
 
     // Kwota kredytu
     private BigDecimal amount = new BigDecimal("300000");
 
     // Czas trwania kredytu
-    private BigDecimal monthDuration = new BigDecimal("240");
+    private BigDecimal monthDuration = new BigDecimal("180");
 
     // Typ spłacanych rat (stałe / malejące)
     private InstallmentType installmentType = InstallmentType.CONSTANT;
 
     // Marża banku
-    private BigDecimal bankMarginPercent = new BigDecimal("1.9");
+    private BigDecimal bankMarginPercent = new BigDecimal("1.2");
+
+    // Mapa przechowuje miesiąc, w którym występuje nadpłata oraz kwotę wysokości nadpłaty.
+    // Schemat zakłada, że najpierw danego miesiąca jest dokonana spłata regularna,
+    // a dopiero następnie dokonywana jest nadpłata. Nie odwrotnie.
+    private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
+            5, BigDecimal.valueOf(10000),
+            6, BigDecimal.valueOf(10000),
+            7, BigDecimal.valueOf(10000),
+            8, BigDecimal.valueOf(10000)
+    );
+
+    // Klasa Overpayment przetrzymuje wartości nadpłat.
+    private String overpaymentReduceWay = Overpayment.REDUCE_PERIOD;
+
+
+    // Przechowuje liczbę miesięcy, w trakcie których nie powinna być dokonywana nadpłata.
+    // W innym przypadku zostaje naliczona prowizja.
+    private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
+
+    // Przechowuje wielkość prowizji (W procentach) doliczanej w przypadku nadpłaty w okresie objętym zakazem nadpłat.
+    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
+
+
+
+    public InputData withOverpaymentSchema(Map<Integer, BigDecimal> overpaymentSchema) {
+        this.overpaymentSchema = overpaymentSchema;
+        return this;
+    };
+    public InputData withOverpaymentReduceWay(String overpaymentReduceWay) {
+        this.overpaymentReduceWay = overpaymentReduceWay;
+        return this;
+    };
+    public InputData withOverpaymentProvisionMonths(BigDecimal overpaymentProvisionMonths) {
+        this.overpaymentProvisionMonths = overpaymentProvisionMonths;
+        return this;
+    };
+    public InputData withOverpaymentProvisionPercent(BigDecimal overpaymentProvisionPercent) {
+        this.overpaymentProvisionPercent = overpaymentProvisionPercent;
+        return this;
+    };
 
 
     // withery
@@ -76,10 +117,26 @@ public class InputData {
     }
 
     public BigDecimal getInterestPercent() {
-        return wiborPercent.add(bankMarginPercent).divide(PERCENT, 10, RoundingMode.HALF_UP);
+        return wiborPercent.add(bankMarginPercent).divide(PERCENT, 4, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getInterestDisplay() {
         return wiborPercent.add(bankMarginPercent).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public Map<Integer, BigDecimal> getOverpaymentSchema() {
+        return overpaymentSchema;
+    }
+
+    public String getOverpaymentReduceWay() {
+        return overpaymentReduceWay;
+    }
+
+    public BigDecimal getOverpaymentProvisionMonths() {
+        return overpaymentProvisionMonths;
+    }
+
+    public BigDecimal getOverpaymentProvisionPercent() {
+        return overpaymentProvisionPercent.divide(PERCENT, 4, RoundingMode.HALF_UP);
     }
 }

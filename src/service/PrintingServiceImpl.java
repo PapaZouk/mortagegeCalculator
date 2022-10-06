@@ -2,6 +2,7 @@ package service;
 
 import model.InputData;
 import model.Installment;
+import model.Summary;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -51,6 +52,15 @@ public class PrintingServiceImpl implements PrintingService{
                         "======================================================================");
             }
         }
+    }
+
+    @Override
+    public void printSummary(Summary summary) {
+        StringBuilder msg = new StringBuilder();
+        msg.append(INTEREST_SUM).append(summary.getInterestSum()).append(CURRENCY);
+        msg.append(NEW_LINE);
+
+        printMessage(new StringBuilder(msg.toString()));
     }
 
     private void printMessage(StringBuilder sb) {
