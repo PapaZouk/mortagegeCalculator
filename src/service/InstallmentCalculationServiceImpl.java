@@ -3,6 +3,7 @@ package service;
 import model.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,9 +57,18 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
       Installment nextInstallment = calculateInstallment(index, inputData, previousInstallment);
       installments.add(nextInstallment);
       previousInstallment = nextInstallment;
+
+      if(mortgageFinish(nextInstallment)) {
+          break;
+      }
     }
 
         return installments;
+    }
+
+    private static boolean mortgageFinish(Installment nextInstallment) {
+        boolean isFinished = BigDecimal.ZERO.equals(nextInstallment.getMortgageResidual().getAmount().setScale(0, RoundingMode.HALF_UP));
+        return isFinished;
     }
 
     // Liczy pierwszą ratę kredytu jako podstawa do obliczeń kolejnych rat, bez odniesienia do poprzednich rat
@@ -67,7 +77,7 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
         Overpayment overpayment = overpaymentCalculatorService.calculate(installmentNumber, inputData);
         InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, overpayment);
         MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, inputData);
-        MortgageReference mortgageReference = referenceCalculatorService.calculate();
+        MortgageReference mortgageReference = referenceCalculatorService.calculate(inputData);
 
         return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual, mortgageReference);
     }
@@ -78,7 +88,7 @@ public class InstallmentCalculationServiceImpl implements InstallmentCalculation
         Overpayment  overpayment = overpaymentCalculatorService.calculate(installmentNumber, inputData);
         InstallmentAmounts installmentAmount = amountsCalculationService.calculate(inputData, overpayment, previousInstallment);
         MortgageResidual mortgageResidual = residualCalculationService.calculate(installmentAmount, previousInstallment);
-        MortgageReference mortgageReference = referenceCalculatorService.calculate();
+        MortgageReference mortgageReference = referenceCalculatorService.calculate(inputData);
 
         return new Installment(timePoint, installmentNumber, installmentAmount, mortgageResidual, mortgageReference);
     }

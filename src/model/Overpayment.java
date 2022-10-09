@@ -5,6 +5,9 @@ import java.math.RoundingMode;
 
 public class Overpayment {
 
+    // Dwie strategie przy nadpłacie raty:
+    // 1. redukcja wielkości rat
+    // 2. redukcja czasu kredytowania
     public static final String REDUCE_RATE = "REDUCE_RATE";
     public static final String REDUCE_PERIOD = "REDUCE_PERIOD";
 

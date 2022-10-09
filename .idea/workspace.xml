@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0f1fae9f-21e3-446e-bcb6-afa572aa54ea" name="Changes" comment="Adding printing method for all installments with details">
-      <change afterPath="$PROJECT_DIR$/src/model/MortgageReference.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Overpayment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Summary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/Function.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/OverpaymentCalculatorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/OverpaymentCalculatorServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/ReferenceCalculatorService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/ReferenceCalculatorServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/SummaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/SummaryServiceFactory.java" afterDir="false" />
+    <list default="true" id="0f1fae9f-21e3-446e-bcb6-afa572aa54ea" name="Changes" comment="Adding OverpaymentCalculatorService with implementation">
+      <change afterPath="$PROJECT_DIR$/src/model/exception/MortgageException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/InputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/InputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Installment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Installment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/InstallmentAmounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/InstallmentAmounts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/MortgageResidual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MortgageResidual.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/TimePoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/TimePoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Overpayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Overpayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Summary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Summary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/AmountCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/AmountCalculationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/AmountsCalculationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/AmountsCalculationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/InstallmentCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/InstallmentCalculationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/MortgageCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/MortgageCalculationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/OverpaymentCalculatorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/OverpaymentCalculatorServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/PrintingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/PrintingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/PrintingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/PrintingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ReferenceCalculatorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReferenceCalculatorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ReferenceCalculatorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ReferenceCalculatorServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/ResidualCalculationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/ResidualCalculationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/SummaryServiceFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/SummaryServiceFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +84,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "extract.method.default.visibility": "private",
     "settings.editor.selected.configurable": "editor.preferences.folding"
   },
   "keyToStringList": {
@@ -152,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665075197534</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adding OverpaymentCalculatorService with implementation">
+      <created>1665091676173</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665091676173</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,22 +183,7 @@
     <MESSAGE value="Adding interfaces of:&#10;- InstallmentCalculationService&#10;- MortgageCalculationService&#10;Adding classes:&#10;- Installment&#10;- InstallmentAmounts&#10;- InstallmentCalculationServiceImpl&#10;- MortgageCalculationServiceImpl&#10;- MortgageResidual&#10;- TimePoint" />
     <MESSAGE value="Adding and updating:&#10;&#10;Interfaces:&#10;- AmountsCalculationService&#10;- PrintingService&#10;- ResidualCalculationService&#10;- TimePointService&#10;&#10;Classes implementing services:&#10;- AmountCalculationServiceImpl&#10;- ResidualCalculationServiceImpl&#10;- TimePointSerivceImpl&#10;&#10;Classes:&#10;- MortgageResidual&#10;- InstallmentAmounts&#10;- Installment&#10;- InputData" />
     <MESSAGE value="Adding printing method for all installments with details" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding printing method for all installments with details" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/service/SummaryServiceFactory.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/service/SummaryServiceFactory.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Adding OverpaymentCalculatorService with implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding OverpaymentCalculatorService with implementation" />
   </component>
 </project>

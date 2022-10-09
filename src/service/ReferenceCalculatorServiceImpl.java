@@ -1,17 +1,16 @@
 package service;
 
+import model.InputData;
 import model.Installment;
 import model.MortgageReference;
 
-public class ReferenceCalculatorServiceImpl implements ReferenceCalculatorService{
-    @Override
-    public MortgageReference calculate() {
-        //TODO: dokończyć metodę
-    }
+import java.math.BigDecimal;
 
+public class ReferenceCalculatorServiceImpl implements ReferenceCalculatorService{
+
+    // Referencje ma zastosowanie, gdy będzie liczony nowy czas trwania kredytu, a nie wielkość raty (rata będzie stała).
     @Override
-    public MortgageReference calculate(Installment previousInstallment) {
-        //TODO: dokończyć metodę
-        return null;
+    public MortgageReference calculate(InputData inputData) {
+        return new MortgageReference(inputData.getAmount(), inputData.getMonthDuration());
     }
 }

@@ -1,10 +1,9 @@
 package service;
 
+import model.InputData;
 import model.Installment;
 import model.MortgageReference;
 
 public interface ReferenceCalculatorService {
-    MortgageReference calculate();
-
-    MortgageReference calculate(Installment previousInstallment);
+    MortgageReference calculate(InputData inputData);
 }

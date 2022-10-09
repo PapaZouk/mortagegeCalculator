@@ -30,15 +30,16 @@ public class OverpaymentCalculatorServiceImpl implements OverpaymentCalculatorSe
         return Optional.empty();
     }
 
+    // Zlicza wysokość prowizji przy nadpłacie w okresie, w którym do nadpłat jest doliczana prowizji.
     private BigDecimal calculateProvision(
             BigDecimal installmentNumber,
             BigDecimal overpaymentAmount,
             InputData inputData
     ) {
-        if(BigDecimal.ZERO.equals(overpaymentAmount)) {
+        if(BigDecimal.ZERO.equals(overpaymentAmount)) { // Jeżeli nadpłata nie nastąpiła
             return BigDecimal.ZERO;
         }
-        if(installmentNumber.compareTo(inputData.getOverpaymentProvisionMonths()) > 0) {
+        if(installmentNumber.compareTo(inputData.getOverpaymentProvisionMonths()) > 0) { // Jeżeli nr raty jest poza okresem naliczania prowizji
             return BigDecimal.ZERO;
         }
 
