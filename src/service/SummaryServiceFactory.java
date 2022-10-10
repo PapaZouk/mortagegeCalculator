@@ -18,7 +18,8 @@ public class SummaryServiceFactory {
 
             BigDecimal provisions = calculate(
                     installments,
-                    installment -> installment.getInstallmentAmounts().getOverpayment().getAmount()
+//                    installment -> installment.getInstallmentAmounts().getOverpayment().getAmount()
+                    installment -> installment.getInstallmentAmounts().getOverpayment().getProvisionAmount()
             );
 
             BigDecimal totalLost = interestSum.add(provisions);

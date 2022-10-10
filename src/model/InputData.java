@@ -14,7 +14,7 @@ public class InputData {
     private LocalDate repaymentStartDate = LocalDate.of(2020, 1, 6);
 
     // Stawka WIBOR
-    private BigDecimal wiborPercent = new BigDecimal("3.75");
+    private BigDecimal wiborPercent = new BigDecimal("6.75");
 
     // Kwota kredytu
     private BigDecimal amount = new BigDecimal("300000");
@@ -34,8 +34,9 @@ public class InputData {
     private Map<Integer, BigDecimal> overpaymentSchema = Map.of(
             5, BigDecimal.valueOf(5000),
             6, BigDecimal.valueOf(5000),
-            7, BigDecimal.valueOf(5000),
-            8, BigDecimal.valueOf(5000)
+            42, BigDecimal.valueOf(5000),
+            50, BigDecimal.valueOf(5000),
+            62, BigDecimal.valueOf(6000)
     );
 
     // Klasa Overpayment przetrzymuje wartości nadpłat.
@@ -47,7 +48,7 @@ public class InputData {
     private BigDecimal overpaymentProvisionMonths = BigDecimal.valueOf(36);
 
     // Przechowuje wielkość prowizji (W procentach) doliczanej w przypadku nadpłaty w okresie objętym zakazem nadpłat.
-    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(2);
+    private BigDecimal overpaymentProvisionPercent = BigDecimal.valueOf(3);
 
 
 

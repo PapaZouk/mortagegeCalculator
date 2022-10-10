@@ -18,7 +18,10 @@ public class Main {
         PrintingService printingService = new PrintingServiceImpl();
         InstallmentCalculationService installmentCalculationService = new InstallmentCalculationServiceImpl(
                 new TimePointSerivceImpl(),
-                new AmountCalculationServiceImpl(),
+                new AmountCalculationServiceImpl(
+                        new ConstantAmountsCalculationServiceImpl(),
+                        new DecreasingAmountsCalculationServiceImpl()
+                ),
                 new OverpaymentCalculatorServiceImpl(),
                 new ReferenceCalculatorServiceImpl(),
                 new ResidualCalculationServiceImpl()

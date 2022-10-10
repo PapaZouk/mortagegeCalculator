@@ -31,9 +31,9 @@ public interface PrintingService {
 
     String OVERPAYMENT = "NADPŁATA: ";
     String INTEREST = "ODSETKI: ";
-    String LEFT_AMOUNT = " POZOSTAŁA KWOTA: ";
+    String LEFT_AMOUNT = " POZ. KWOTA: ";
 
-    String LEFT_MONTHS = " POZOSTAŁO MIESIĘCY: ";
+    String LEFT_MONTHS = " POZ. MSCY: ";
     String MORTGAGE_AMOUNT = "KWOTA KREDYTU: ";
     String MORTGAGE_PERIOD = "OKRES KREDYTOWANIA: ";
 

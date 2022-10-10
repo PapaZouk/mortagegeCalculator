@@ -21,8 +21,9 @@ public class PrintingServiceImpl implements PrintingService {
         msg.append(INTEREST).append(inputData.getInterestDisplay()).append(PERCENT);
         msg.append(NEW_LINE);
 
-        Optional.of(inputData.getOverpaymentSchema())
-                .filter(schema -> schema.size() > 0).ifPresent(schema -> logOverpayment(msg, inputData));
+        Optional.ofNullable(inputData.getOverpaymentSchema())
+                .filter(schema -> schema.size() > 0)
+                .ifPresent(schema -> logOverpayment(msg, inputData));
 
         printMessage(msg);
     }
@@ -45,16 +46,16 @@ public class PrintingServiceImpl implements PrintingService {
 
     @Override
     public void printInstallments(List<Installment> installments) {
-        String format = "%4s %3s | " +
-                "%4s %6s | " +
-                "%6s %2s | " +
-                "%4s %2s | " +
-                "%4s %8s | " +
-                "%7s %8s | " +
-                "%7s %10s | " +
-                "%7s %10s | " +
-                "%7s %10s | " +
-                "%7s %3s | ";
+        String format = "%s%3s | " +
+                "%5s%11s | " +
+                "%4s%2s | " +
+                "%8s%2s | " +
+                "%5s%8s | " +
+                "%8s%8s | " +
+                "%8s%8s | " +
+                "%8s%8s | " +
+                "%13s%10s | " +
+                "%-13s%3s | ";
 
         for (Installment installment : installments) {
             String message = String.format(format,
@@ -73,10 +74,10 @@ public class PrintingServiceImpl implements PrintingService {
 
             if (installment.getInstallmentNumber().remainder(BigDecimal.valueOf(12)).equals(BigDecimal.ZERO)) {
                 System.out.println("== Year of payment NR: " + installment.getTimePoint().getYear() +
-                        " =============================================" +
-                        "=============================================" +
-                        "=============================================" +
-                        "=============================================");
+                        " =========================================" +
+                        "==========================================" +
+                        "==========================================" +
+                        "==========================================");
             }
         }
     }
