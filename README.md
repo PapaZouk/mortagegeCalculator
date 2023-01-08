@@ -1,5 +1,5 @@
 # Mortagege Calculator
-This project was based on bootcamp. Its main purpose was to show understanding of OOP in Java
+Final project for Java Fundamentals Bootcamp with zajavka.pl between July 2022 and October 2022. The purpose of this project was to show understanding of Object Oriented Programming concept and it's core functionality by applying some popular design patterns like Builder pattern.
 
 ## Project assumtions:
 
